@@ -13,6 +13,13 @@ after_success:
   - docker build -t axteb/multi-nginx ./nginx
   - docker build -t axteb/multi-server ./server
   - docker build -t axteb/multi-worker ./worker
+    # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
+    # Take those images and push them to docker hub
+  - docker push axteb/multi-client
+  - docker push axteb/multi-nginx
+  - docker push axteb/multi-server
+  - docker push axteb/multi-worker
 
 language: generic
 
